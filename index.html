@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Taiyo Tsuchiya</title>
   <meta name="description" content="Taiyo Tsuchiya — Builder, thinker, and creator based in Tokyo.">
-  <link rel="icon" type="image/png" href="Favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -227,8 +227,32 @@
         padding: 1.5rem;
       }
 
+      .container {
+        padding: 0 0.5rem;
+      }
+
+      .name {
+        flex-direction: column;
+        white-space: normal;
+        gap: 0.5rem;
+        font-size: 2rem;
+        /* Slightly smaller on mobile to prevent overflow */
+      }
+
+      .intro {
+        margin-top: 2rem;
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+
       nav {
+        margin-top: 2.5rem;
         gap: 1.5rem;
+      }
+
+      .title-icon {
+        height: 1.1em;
+        /* Slightly smaller icons on mobile */
       }
     }
   </style>
