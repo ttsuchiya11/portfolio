@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Taiyo Tsuchiya</title>
+  <meta name="description" content="Projects and experiments by Taiyo Tsuchiya.">
+  <link rel="icon" type="image/png" href="assets/flavicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF9;
+      --fg: #1A1A1A;
+      --muted: #6B6B6B;
+      --accent: #C4A47C;
+      --accent-hover: #B08D5B;
+      --border: #E8E8E6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s ease;
+    }
+
+    .back:hover {
+      color: var(--accent-hover);
+    }
+
+    .back svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .back:hover svg {
+      transform: translateX(-3px);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    /* Projects grid - ready for future content */
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .project-card {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .project-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Coming soon state */
+    .coming-soon {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      margin-bottom: 4rem;
+    }
+
+    .coming-soon-text {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .coming-soon-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      opacity: 0.7;
+      margin-top: 0.5rem;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto 3rem;
+      max-width: 120px;
+    }
+
+    /* Subscribe section */
+    .subscribe {
+      text-align: center;
+    }
+
+    .subscribe h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .subscribe .subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .substack-embed {
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .substack-embed iframe {
+      display: block;
+      width: 100%;
+      height: 150px;
+      border: 0;
+      background: white;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page {
+        animation: none;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 3rem 1.5rem 4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <a href="index.html" class="back">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back
+    </a>
+
+    <header>
+      <h1>Projects</h1>
+      <p class="lead">Things I've been building — from creative experiments to technical prototypes.</p>
+    </header>
+
+    <div class="coming-soon">
+      <p class="coming-soon-text">Projects coming soon</p>
+      <p class="coming-soon-sub">Currently building in the background</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <section class="subscribe">
+      <h2>Stay Updated</h2>
+      <p class="subtitle">Get notified when I ship something new</p>
+      <div class="substack-embed">
+        <iframe src="https://taiyotsuchiya.substack.com/embed" scrolling="no" frameborder="0"></iframe>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
