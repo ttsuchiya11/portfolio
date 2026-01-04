@@ -5,136 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | Taiyo Tsuchiya</title>
-  <meta name="description" content="About Taiyo Tsuchiya — Builder, thinker, and creator based in Tokyo.">
+  <meta name="description" content="About Taiyo Tsuchiya">
   <link rel="icon" type="image/png" href="assets/flavicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@500&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@500&family=Merriweather:wght@300;400;700;900&display=swap"
     rel="stylesheet">
-  <style>
-    :root {
-      --bg: #FAFAF9;
-      --fg: #1A1A1A;
-      --muted: #6B6B6B;
-      --accent: #C4A47C;
-      --accent-hover: #B08D5B;
-      --border: #E8E8E6;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      font-size: 16px;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      min-height: 100vh;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .page {
-      max-width: 560px;
-      margin: 0 auto;
-      padding: 4rem 2rem 6rem;
-      animation: fadeIn 0.8s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .back {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-      text-decoration: none;
-      margin-bottom: 3rem;
-      transition: color 0.2s ease;
-    }
-
-    .back:hover {
-      color: var(--accent-hover);
-    }
-
-    .back svg {
-      width: 16px;
-      height: 16px;
-      transition: transform 0.2s ease;
-    }
-
-    .back:hover svg {
-      transform: translateX(-3px);
-    }
-
-    header {
-      margin-bottom: 2.5rem;
-    }
-
-    h1 {
-      font-size: clamp(1.75rem, 4vw, 2.25rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .content {
-      margin-bottom: 3rem;
-    }
-
-    .content p {
-      font-size: 1.05rem;
-      color: var(--fg);
-      line-height: 1.75;
-      margin-bottom: 1.25rem;
-    }
-
-    .content p:last-child {
-      margin-bottom: 0;
-    }
-
-    .signature {
-      font-family: 'Caveat', cursive;
-      font-size: 12rem;
-      color: var(--fg);
-      margin-top: 2.5rem;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .page {
-        animation: none;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition: none !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .page {
-        padding: 3rem 1.5rem 4rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
