@@ -1,0 +1,360 @@
+:root {
+  --bg: #FAFAF9;
+  --fg: #1A1A1A;
+  --muted: #6B6B6B;
+  --accent: #C4A47C;
+  --accent-hover: #B08D5B;
+  --border: #E8E8E6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Index Page Syles */
+.container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 0.8s ease-out;
+  margin: 0 auto; /* Added to ensure centering if flex isn't used on body, but body has flex centering in index.html styles. */
+}
+
+/* Note: Index page body has specific flex properties. 
+   I will move those to a specific class or keep them on body if appropriate.
+   Projects page body does NOT have flex centering.
+   So I should probably scope the body flex styles to the index page or a common wrapper.
+   However, allow me to check.
+   Index body: display: flex; justify-content: center; align-items: center; padding: 2rem;
+   Projects body: no flex, no padding (padding is on .page).
+   
+   Solution: Create a class `.centered-layout` for the body of index.html 
+   OR just apply those styles to `.container` parent if possible?
+   The body in index.html acts as the flex container.
+   I should extract the body layout styles for index.html into a class, say `.home-body`, and add that class to the body tag in index.html.
+*/
+
+.home-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.name {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.5rem;
+}
+
+.title-icon {
+  height: 1.2em;
+  width: auto;
+  vertical-align: middle;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  margin-left: 0.3rem;
+}
+
+.tilt-right {
+  transform: rotate(6deg);
+}
+
+.tilt-right:hover {
+  transform: rotate(12deg) scale(1.1);
+}
+
+.tilt-left {
+  transform: rotate(-6deg);
+}
+
+.tilt-left:hover {
+  transform: rotate(-12deg) scale(1.1);
+}
+
+.intro {
+  margin-top: 2.5rem;
+  font-size: 1.05rem;
+  color: var(--fg);
+  font-weight: 400;
+  line-height: 1.7;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+nav {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--fg);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent-hover);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Projects Page Styles */
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color 0.2s ease;
+}
+
+.back:hover {
+  color: var(--accent-hover);
+}
+
+.back svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.back:hover svg {
+  transform: translateX(-3px);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.lead {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+/* Projects grid */
+.projects-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.project-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.project-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Coming soon state */
+.coming-soon {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  margin-bottom: 4rem;
+}
+
+.coming-soon-text {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.coming-soon-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 auto 3rem;
+  max-width: 120px;
+}
+
+/* Subscribe section */
+.subscribe {
+  text-align: center;
+}
+
+.subscribe h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.subscribe .subtitle {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.substack-embed {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  width: 100%;
+  max-width: 480px;
+}
+
+.substack-embed iframe {
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: 0;
+  background: white;
+}
+
+/* Media Queries */
+@media (prefers-reduced-motion: reduce) {
+  .container, .page {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Index specific mobile styles */
+  .home-body {
+    padding: 1.5rem;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .name {
+    flex-direction: column;
+    white-space: normal;
+    gap: 0;
+    line-height: 1.1;
+    font-size: 2rem;
+  }
+
+  .intro {
+    margin-top: 2rem;
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  nav {
+    margin-top: 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .title-icon {
+    height: 1.1em;
+  }
+  
+  /* Projects specific mobile styles */
+  .page {
+    padding: 3rem 1.5rem 4rem;
+  }
+}
