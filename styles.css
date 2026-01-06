@@ -381,7 +381,7 @@ h1 {
 }
 
 .content a {
-    color: inherit;
+    color: var(--fg);
     text-decoration: none;
     font-weight: 600;
 }
