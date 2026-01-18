@@ -5,6 +5,19 @@
     --accent: #C4A47C;
     --accent-hover: #B08D5B;
     --border: #d0d0d0;
+    --card-bg: white;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #1a1d23;
+        --fg: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #d4b896;
+        --accent-hover: #e5c9a8;
+        --border: #374151;
+        --card-bg: #252a33;
+    }
 }
 
 * {
@@ -223,13 +236,7 @@ h1 {
     padding: 1.5rem;
     border: 1px solid var(--border);
     border-radius: 8px;
-    background: white;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.project-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
+    background: var(--card-bg);
 }
 
 .project-card h3 {
@@ -242,6 +249,43 @@ h1 {
     font-size: 0.95rem;
     color: var(--muted);
     margin: 0;
+}
+
+.project-bullets {
+    margin-top: 1rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+}
+
+.project-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+}
+
+.project-bullets li:last-child {
+    margin-bottom: 0;
+}
+
+.project-chip {
+    display: inline-block;
+    margin-top: 1.25rem;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent-hover);
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.project-chip:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-1px);
 }
 
 /* Coming soon state */
@@ -296,7 +340,7 @@ h1 {
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
-    background: white;
+    background: var(--card-bg);
     width: 100%;
     max-width: 480px;
 }
@@ -306,7 +350,21 @@ h1 {
     width: 100%;
     height: 150px;
     border: 0;
-    background: white;
+    background: var(--card-bg);
+}
+
+.dark-mode-apology {
+    display: none;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+    font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dark-mode-apology {
+        display: block;
+    }
 }
 
 /* Media Queries */
