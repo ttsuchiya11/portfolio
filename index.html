@@ -18,12 +18,16 @@
 <body class="home-body">
   <main class="container">
     <h1 class="name">
-      <span>Just me<img src="assets/memoji_w_border.png" class="title-icon tilt-right" alt="Memoji"></span>
-      <span>and my computer<img src="assets/happymac.png" class="title-icon tilt-left" alt="Happy Mac"></span>
+      <span>Just me<img src="assets/Title Icons/Memoji.png" class="title-icon tilt-right" alt="Memoji"></span>
+      <span>and <span class="my-prefix">my </span><span class="easter-egg-slot">
+        <span class="slot-container">
+          <span class="slot-item active" data-item="computer">computer<img src="assets/Title Icons/Happy Mac.png" class="title-icon tilt-left" alt="Happy Mac"></span>
+        </span>
+      </span></span>
     </h1>
 
     <p class="intro">
-      Small projects, ideas in progress, and things I’m curious about.
+      Working on small projects, ideas in progress, and things I’m curious about.
     </p>
 
     <nav>
@@ -32,6 +36,157 @@
       <a href="about.html">About</a>
     </nav>
   </main>
+
+  <script>
+    (function() {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
+      const items = [
+        { text: 'computer', icon: 'Happy Mac.png', alt: 'Happy Mac' },
+        { text: 'airpods', icon: 'Airpods.png', alt: 'Airpods' },
+        { text: 'bicycle', icon: 'Bicycle.png', alt: 'Bicycle' },
+        { text: 'kindle', icon: 'Kindle Light.png', iconDark: 'Kindle Dark.png', alt: 'Kindle' },
+        { text: 'matcha', icon: 'Matcha.png', alt: 'Matcha' },
+        { text: 'final_final_v13', icon: 'Folder.png', alt: 'Folder', skipMy: true },
+        { text: 'double double', icon: 'Double Double.png', alt: 'Double Double' },
+        { text: 'Claude Code', icon: 'Claude Icon.png', alt: 'Claude Code', skipMy: true },
+        { text: 'Taylor playlist', icon: 'Sparkly 13.png', alt: 'Sparkly 13' },
+      ];
+
+      const preloadedImages = [];
+      const seenIcons = new Set();
+      items.forEach(item => {
+        [item.icon, item.iconDark].forEach(icon => {
+          if (!icon || seenIcons.has(icon)) return;
+          const img = new Image();
+          img.src = `assets/Title Icons/${icon}`;
+          preloadedImages.push(img);
+          seenIcons.add(icon);
+        });
+      });
+
+      const START_DELAY = 10000;
+      const DISPLAY_DURATION = 5000;
+      const ANIMATION_DURATION = 700;
+
+      let cycleTimer = null;
+      let startTimer = null;
+      let isAnimating = false;
+      let currentIndex = 0;
+
+      const slotContainer = document.querySelector('.slot-container');
+      const myPrefix = document.querySelector('.my-prefix');
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      function refreshSlotWidth() {
+        const currentEl = slotContainer.querySelector('.slot-item.active');
+        if (!currentEl) return;
+        slotContainer.style.width = Math.ceil(currentEl.getBoundingClientRect().width) + 'px';
+      }
+
+      function getIconPath(item) {
+        const icon = (isDark && item.iconDark) ? item.iconDark : item.icon;
+        return `assets/Title Icons/${icon}`;
+      }
+
+      function createSlotItem(item, className = '') {
+        const span = document.createElement('span');
+        span.className = `slot-item ${className}`.trim();
+        span.dataset.item = item.text;
+        span.innerHTML = `${item.text}<img src="${getIconPath(item)}" class="title-icon tilt-left" alt="${item.alt}">`;
+        return span;
+      }
+
+      function measureSlotWidth(el) {
+        return Math.ceil(el.getBoundingClientRect().width) + 12;
+      }
+
+      function animateToNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const nextIndex = (currentIndex + 1) % items.length;
+        const nextItem = items[nextIndex];
+        const currentEl = slotContainer.querySelector('.slot-item.active');
+
+        const nextEl = createSlotItem(nextItem, 'entering');
+        slotContainer.appendChild(nextEl);
+
+        // Measure current width
+        const currentWidth = Math.ceil(currentEl.getBoundingClientRect().width);
+        slotContainer.style.width = currentWidth + 'px';
+
+        // Measure new item width (make it visible momentarily)
+        nextEl.style.position = 'absolute';
+        nextEl.style.visibility = 'hidden';
+        nextEl.classList.remove('entering');
+        const newWidth = measureSlotWidth(nextEl);
+        const nextImg = nextEl.querySelector('img');
+        if (nextImg && !nextImg.complete) {
+          nextImg.addEventListener('load', () => {
+            const loadedWidth = measureSlotWidth(nextEl);
+            const currentWidthValue = parseFloat(slotContainer.style.width || 0);
+            if (loadedWidth > currentWidthValue) {
+              slotContainer.style.width = loadedWidth + 'px';
+            }
+          }, { once: true });
+        }
+        nextEl.classList.add('entering');
+        nextEl.style.position = '';
+        nextEl.style.visibility = '';
+
+        if (nextItem.skipMy) {
+          myPrefix.classList.add('hidden');
+        } else {
+          myPrefix.classList.remove('hidden');
+        }
+
+        requestAnimationFrame(() => {
+          slotContainer.style.width = newWidth + 'px';
+          currentEl.classList.add('exiting');
+          currentEl.classList.remove('active');
+          nextEl.classList.remove('entering');
+          nextEl.classList.add('active', 'bouncing');
+        });
+
+        setTimeout(() => {
+          currentEl.remove();
+          nextEl.classList.remove('bouncing');
+          currentIndex = nextIndex;
+          isAnimating = false;
+
+          if (currentIndex === 0) {
+            stopCycle();
+            slotContainer.style.width = '';
+          }
+        }, ANIMATION_DURATION);
+      }
+
+      function startCycle() {
+        if (cycleTimer || currentIndex !== 0) return;
+        document.body.classList.add('easter-egg-active');
+        cycleTimer = setInterval(animateToNext, DISPLAY_DURATION);
+      }
+
+      function stopCycle() {
+        if (cycleTimer) {
+          clearInterval(cycleTimer);
+          cycleTimer = null;
+        }
+        document.body.classList.remove('easter-egg-active');
+        startTimer = setTimeout(startCycle, START_DELAY);
+      }
+
+      startTimer = setTimeout(startCycle, START_DELAY);
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) refreshSlotWidth();
+      });
+      window.addEventListener('pageshow', refreshSlotWidth);
+      window.addEventListener('focus', refreshSlotWidth);
+    })();
+  </script>
 </body>
 
 </html>

@@ -60,22 +60,8 @@ body {
     text-align: center;
     animation: fadeIn 0.8s ease-out;
     margin: 0 auto;
-    /* Added to ensure centering if flex isn't used on body, but body has flex centering in index.html styles. */
 }
 
-/* Note: Index page body has specific flex properties. 
-   I will move those to a specific class or keep them on body if appropriate.
-   Projects page body does NOT have flex centering.
-   So I should probably scope the body flex styles to the index page or a common wrapper.
-   However, allow me to check.
-   Index body: display: flex; justify-content: center; align-items: center; padding: 2rem;
-   Projects body: no flex, no padding (padding is on .page).
-   
-   Solution: Create a class `.centered-layout` for the body of index.html 
-   OR just apply those styles to `.container` parent if possible?
-   The body in index.html acts as the flex container.
-   I should extract the body layout styles for index.html into a class, say `.home-body`, and add that class to the body tag in index.html.
-*/
 
 .home-body {
     display: flex;
@@ -453,4 +439,95 @@ h1 {
     font-size: 12rem;
     color: var(--fg);
     margin-top: 2.5rem;
+}
+
+/* Easter Egg Slot Animation */
+.my-prefix {
+    display: inline;
+    transition: opacity 0.3s ease;
+}
+
+.my-prefix.hidden {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.easter-egg-slot {
+    display: inline-flex;
+    position: relative;
+    vertical-align: baseline;
+    overflow: hidden;
+    padding-right: 0.5em;
+}
+
+.slot-container {
+    display: inline-flex;
+    position: relative;
+    align-items: baseline;
+    transition: width 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.slot-item {
+    display: inline-flex;
+    align-items: baseline;
+    white-space: nowrap;
+}
+
+.slot-item .title-icon {
+    align-self: center;
+    margin-left: 0.4rem;
+}
+
+.slot-item.entering {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.slot-item.active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s ease;
+}
+
+.slot-item.active.bouncing {
+    animation: slotSlide 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.slot-item.exiting {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s ease;
+}
+
+@keyframes slotSlide {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slot-item,
+    .slot-item.active,
+    .slot-item.exiting,
+    .slot-item.entering,
+    .slot-container,
+    .my-prefix {
+        animation: none !important;
+        transition: none !important;
+    }
 }
