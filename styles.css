@@ -240,7 +240,12 @@ h1 {
 .project-bullets {
     margin-top: 1rem;
     padding-left: 1.25rem;
-    list-style: disc;
+    list-style: none;
+}
+
+.project-bullets li::before {
+    content: "- ";
+    margin-left: -0.75rem;
 }
 
 .project-bullets li {
@@ -254,9 +259,35 @@ h1 {
     margin-bottom: 0;
 }
 
+.project-link {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.project-link:hover {
+    color: var(--accent-hover);
+}
+
+.project-link svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+}
+
+.project-link:hover svg {
+    transform: translateX(3px);
+}
+
 .project-chip {
     display: inline-block;
-    margin-top: 1.25rem;
+    margin-top: 0.75rem;
     padding: 0.4rem 0.9rem;
     font-size: 0.8rem;
     font-weight: 500;
