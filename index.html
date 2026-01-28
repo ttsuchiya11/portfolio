@@ -64,12 +64,12 @@
         { text: 'computer', icon: 'Happy Mac.png', alt: 'Happy Mac' },
         { text: 'airpods', icon: 'Airpods.png', alt: 'Airpods' },
         { text: 'bicycle', icon: 'Bicycle.png', alt: 'Bicycle' },
-        { text: 'kindle', icon: 'Kindle Light.png', iconDark: 'Kindle Dark.png', alt: 'Kindle' },
+        { text: 'kindle', icon: 'Kindle Light.png', iconDark: 'Kindle Dark.png', alt: 'Kindle', href: 'https://www.goodreads.com/user/show/147576187-taiyo'},
         { text: 'matcha', icon: 'Matcha.png', alt: 'Matcha' },
         { text: 'final_final_ver.12', icon: 'Folder.png', alt: 'Folder', skipMy: true },
         { text: 'double double', icon: 'Double Double.png', alt: 'Double Double' },
         { text: 'Claude Code', icon: 'Claude Icon.png', alt: 'Claude Code', skipMy: true },
-        { text: 'Taylor playlist', icon: 'Sparkly 13.png', alt: 'Sparkly 13' },
+        { text: 'Taylor playlist', icon: 'Sparkly 13.png', alt: 'Sparkly 13', },
         { text: 'podcasts', icon: 'Podcast App.png', alt: 'Podcast App' },
         { text: 'actual computer', icon: 'Mac.png', alt: 'Macbook Pro' },
       ];
@@ -114,7 +114,9 @@
         const span = document.createElement('span');
         span.className = `slot-item ${className}`.trim();
         span.dataset.item = item.text;
-        span.innerHTML = `${item.text}<img src="${getIconPath(item)}" class="title-icon tilt-left" alt="${item.alt}">`;
+        const img = `<img src="${getIconPath(item)}" class="title-icon tilt-left" alt="${item.alt}">`;
+        const icon = item.href ? `<a href="${item.href}" target="_blank" rel="noopener noreferrer">${img}</a>` : img;
+        span.innerHTML = `${item.text}${icon}`;
         return span;
       }
 
